@@ -8,12 +8,32 @@ class InputPage(BasePage):
 
     PAGE_URL = Links.INPUT_PAGE
 
-    def click_on_input_field(self):
+    def click_on_text_input_field(self):
         self.click_on_element(InputPageLocators.INPUT_FIELD)
 
-    def enter_keys_to_input_field(self):
+    def enter_keys_to_text_input(self):
         self.send_keys_to_input(InputPageLocators.INPUT_FIELD,InputData.name)
         return InputData.name
+
+    def click_on_email_tab(self):
+        self.click_on_element(InputPageLocators.EMAIL_TAB)
+
+    def click_on_email_input_field(self):
+        self.click_on_element(InputPageLocators.EMAIL_FIELD)
+
+    def enter_keys_to_email_input(self):
+        self.send_keys_to_input(InputPageLocators.EMAIL_FIELD,InputData.email)
+        return InputData.email
+
+    def click_on_password_tab(self):
+        self.click_on_element(InputPageLocators.PASSWORD_TAB)
+
+    def click_on_password_input_field(self):
+        self.click_on_element(InputPageLocators.PASSWORD_FIELD)
+
+    def enter_keys_to_password_input(self):
+        self.send_keys_to_input(InputPageLocators.PASSWORD_FIELD,InputData.password)
+        return InputData.password
 
     def wait_result_box(self):
         self.wait_visibility_of_element(InputPageLocators.RESULT_TEXT)
