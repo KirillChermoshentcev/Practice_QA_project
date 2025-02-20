@@ -38,8 +38,8 @@ class InputPage(BasePage):
         return InputData.password
 
     def wait_result_box(self):
-        wait = WebDriverWait(self.driver, timeout=10)
-        wait.until(EC.presence_of_element_located(InputPageLocators.RESULT_TEXT))
+        wait = WebDriverWait(self.driver, timeout=20)
+        wait.until(EC.visibility_of_element_located(InputPageLocators.RESULT_TEXT))
 
     def get_result_text(self):
         full_text = self.get_text_from_element(InputPageLocators.RESULT_TEXT)
