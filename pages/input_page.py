@@ -1,5 +1,7 @@
 from pages.base_page import BasePage
 from locators.input_page_locators import InputPageLocators
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from helpers import InputData
 from links import Links
 
@@ -36,7 +38,8 @@ class InputPage(BasePage):
         return InputData.password
 
     def wait_result_box(self):
-        self.wait_visibility_of_element(InputPageLocators.RESULT_TEXT)
+        wait = WebDriverWait(self.driver, timeout=10)
+        wait.until(EC.visibility_of_element_located(InputPageLocators.RESULT_TEXT))
 
     def get_result_text(self):
         full_text = self.get_text_from_element(InputPageLocators.RESULT_TEXT)
