@@ -1,5 +1,4 @@
 from pages.base_page import BasePage
-from locators.input_page_locators import InputPageLocators
 from locators.buttons_page_locators import ButtonsPageLocators
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
