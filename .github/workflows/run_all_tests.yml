@@ -1,4 +1,4 @@
-name: QA_Practice_all_tests
+name: QA_Practice_all_tests_parallel
 
 
 on:
@@ -18,6 +18,28 @@ jobs:
       - name: Install Chrome
         run: sudo apt-get install google-chrome-stable
       - name: install dependencies
+        run: pip install -r requirements.txt
+      - name: all_tests
+        run: pytest tests -v
+
+  parallel_test:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+      - name: Install Chrome
+        run: |
+          $chromePath = "$env:ProgramFiles\Google\Chrome\Application\chrome.exe"
+          if (-Not (Test-Path $chromePath)) {
+              Invoke-WebRequest -Uri "https://dl.google.com/chrome/install/latest/chrome_installer.exe" -OutFile "$env:TEMP\chrome_installer.exe"
+              Start-Process -FilePath "$env:TEMP\chrome_installer.exe" -ArgumentList "/silent /install" -NoNewWindow -Wait
+          }
+      - name: Install dependencies
         run: pip install -r requirements.txt
       - name: all_tests
         run: pytest tests -v
