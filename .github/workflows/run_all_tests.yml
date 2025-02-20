@@ -5,7 +5,7 @@ on:
   workflow_dispatch
 
 jobs:
-  test:
+  ubuntu_test:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,7 +22,7 @@ jobs:
       - name: all_tests
         run: pytest tests -v
 
-  parallel_test:
+  windows_test:
     runs-on: windows-latest
 
     steps:
@@ -43,3 +43,25 @@ jobs:
         run: pip install -r requirements.txt
       - name: all_tests
         run: pytest tests -v
+
+  macos_test:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install Chrome
+        run: |
+          brew install --cask google-chrome
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: all_tests
+        run: pytest tests/test_input_page.py::TestInputPage::test_name_input_field
