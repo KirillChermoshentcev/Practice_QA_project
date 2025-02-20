@@ -39,7 +39,7 @@ class InputPage(BasePage):
 
     def wait_result_box(self):
         wait = WebDriverWait(self.driver, timeout=10)
-        wait.until(EC.visibility_of_element_located(InputPageLocators.RESULT_TEXT))
+        wait.until(EC.presence_of_element_located(InputPageLocators.RESULT_TEXT))
 
     def get_result_text(self):
         full_text = self.get_text_from_element(InputPageLocators.RESULT_TEXT)
