@@ -20,10 +20,13 @@ class BasePage:
         return self.driver.find_element(*locator)
 
     def wait_visibility_of_element(self, locator, timeout=10):
-        return WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located(locator))
+        return WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
-    def check_element_is_clickable(self, locator, timeout=15):
-        return WebDriverWait(self.driver,timeout).until(EC.element_to_be_clickable(locator))
+    def wait_visibility_of_elements(self, locator, timeout=10):
+        return WebDriverWait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
+
+    def elements_are_visible(self, locator, timeout=15):
+        return WebDriverWait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
 
     def click_on_element(self, locator):
         self.wait.until(EC.element_to_be_clickable(locator)).click()
